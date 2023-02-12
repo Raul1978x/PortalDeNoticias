@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>News Egg</title>
+        <link
+            th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css}"
+            rel="stylesheet"
+            integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+            crossorigin="anonymous"
+            />
+        <link rel="stylesheet" th:href="@{css/inicio.css}" />
+    </head>
+    <body class="bg-dark">
+        <!--nav-->
+        <div th:include="layout/template.html::nav"></div>
+
+        <!-- card ultimas Noticias -->
+        <div class="container text-left">
+            <div class="row align-items-start bg-warning rounded" th:each="noticia:${noticias}">
+                <div class="card m-2" style="width: 70rem">
+                    <h5 class="card-title fs-1" th:text="${noticia.titulo}">
+                        Ramón Dupuy: "A Lucio le prometimos luchar para cuidar a los niños"
+                    </h5>
+                    <img th:src="@{/img/{img} (img =${noticia.imagen})}" class="card-img-top" th:alt="${noticia.imagen}">
+                    <div class="card-body">
+                        <div class="fs-5" th:text="${noticia.cuerpo}">
+                            <p>
+                                Ramón Dupuy habló con CNN Radio sobre la sentencia en el caso
+                                por el crimen de su nieto Lucio Dupuy. "No estoy conforme con la
+                                sentencia. Sí con la culpabilidad, que es lo que fuimos a
+                                buscar; pero la sentencia tendría que haber sido sumando el
+                                agravante de odio de género opuesto: a Lucio lo matan por ser
+                                varón e interferir en la pareja. Y la absolución de la
+                                progenitora del abuso sexual también tendría que revisarse. La
+                                acusación está a medias", expresó en diálogo con Hora 10, de
+                                Francisco Olivera.
+                            </p>
+                            <p>
+                                "La sentencia real será el 13, así que ahora tendremos que
+                                esperar unos días más. Cuando terminó el juicio le dije a mi
+                                hijo 'lo logramos'. Por lo menos fue un poquito de alivio a su
+                                corazón. Y que llore todo lo que tenga que llorar", añadió. Yo a
+                                Lucio no lo recupero más, nadie me lo va a devolver. Pero esto
+                                tiene que ser un punto de inflexión, que Argentina sepa lo que
+                                está pasando con los niños y adolescentes en el país. Según
+                                expresó Ramón, "se presentaron todas las pruebas habidas y por
+                                haber a la jueza (que le brindó la tenencia a la madre).
+                            </p>
+                            <p>
+                                Estoy esperando que la jueza se digne a levantar el teléfono y
+                                pedir disculpas. La jueza estaba advertida de todo, no podía
+                                obviar lo que venía pasando con Lucio. Ella falló para revocar
+                                la tenencia de Lucito". "Si yo hubiese intuido o hubiese visto
+                                una mínima señal de Lucio... Vivo a 140 kilómetros de donde se
+                                lo habían llevado. Te aseguro que los hubiera caminado para
+                                buscarlo, y hoy ellas no estarían vivas y yo no estaría hablando
+                                con vos. Pero Lucio estaría vivo. No teníamos ni la más mínima
+                                idea.
+                            </p>
+                            <p>
+                                Estábamos en plena pandemia, no lo podíamos ver y solo lo
+                                veíamos por videollamada. ¿Vos te darías cuenta por una pantalla
+                                de teléfono si el niño hubiera sido abusado?", agregó. En este
+                                sentido, indicó que "quisiera que se pongan en el lugar de la
+                                familia y vean lo que pasó. Cuando nos revocaron la tenencia nos
+                                ataron de pies y manos. Tuvimos un impedimento de ver a Lucio
+                                por parte de la progenitora, la asesina. Cuando Cristian debía
+                                sacar permiso para verlo, ella lo hacía viajar y luego le decían
+                                'no te lo llevás'. Y eso ocurrió durante un año y tres meses".
+                                Además, expresó que "cada vez que llegaba un mensaje a mi
+                                teléfono decía "Lucio quiere hablar con vos". Y eso era porque
+                                ella necesitaba plata. Ahí empezaban los chats y el relato de
+                                ella de que necesitaba plata. Y están todos los depósitos, una
+                                vez que hacíamos la transferencia, automáticamente aparecía la
+                                cara de Lucito".
+                            </p>
+                            <p>
+                                Que se haga lo que se tenga que hacer con aquellos que tuvieron
+                                responsabilidad en el caso de Lucio. Dupuy explicó que "la jueza
+                                falló en muchos puntos. Tendría que haber actuado, y como
+                                titular de ese Tribunal, debería tener la capacidad de preguntar
+                                dónde se llevan al nene, cómo va a vivir, quién lo va a
+                                mantener, con quién va a vivir, por qué lo sacan del seno
+                                familiar. No se hizo un seguimiento con psicopedagogas, no
+                                llamaron al padre, fallaron en muchísimos puntos". También
+                                aseguró que "el dolor va a seguir de por vida, porque a Lucio lo
+                                asesinaron de esta manera. La herida no va a sanar nunca. Yo hoy
+                                estoy con dos grandes amigos en la vereda de mi casa, y es la
+                                gente, el periodismo, el ciudadano de a pie, todos los que no
+                                dejaron caer a Lucito, los que nos dan fuerzas para seguir de
+                                pie". "Todavía no estamos enterados de todo. Hay más cosas en el
+                                expediente. Duele muchísimo remover todo de vuelta, pero quedan
+                                muchos Lucio por salvar. Y por eso vamos y luchamos. Cuando
+                                dejamos a Lucio en el cementerio, le hicimos una promesa: luchar
+                                por todos los Lucios que quedan, que son miles. La ley está para
+                                cuidar a los chicos, y lucharemos para que se apruebe", cerró.
+                            </p>
+                        </div>
+                    </div>
+                    <a th:href="@{/}" class="btn btn-dark m-1">volver</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--footer-->
+<div th:include="layout/template.html::footer"></div>
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"
+></script>
+</body>
+</html>
