@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,7 +24,9 @@ public class UsuarioServicio implements UserDetailsService {
     private IUsuarioRepositorio usuarioRepositorio;
 
     @Transactional
-    public void registrar(String nombre, String email, String password, String password2) throws MiExcepcion {
+    public void registrar(String nombre, String email, String password, 
+            String password2) throws MiExcepcion {
+        
         validar(nombre, email, password, password2);
 
         Usuario usuario = new Usuario();
@@ -31,7 +34,7 @@ public class UsuarioServicio implements UserDetailsService {
         usuario.setNombre(nombre);
         usuario.setEmail(email);
 
-        usuario.setPassword(password);
+        usuario.setPassword(new BCryptPasswordEncoder().encode(password));
 
         usuario.setRol(Rol.USER);
 
@@ -44,9 +47,7 @@ public class UsuarioServicio implements UserDetailsService {
         if (usuario != null) {
 
             List<GrantedAuthority> permisos = new ArrayList<>();
-
             GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + usuario.getRol().toString());
-            
             permisos.add(p);
             
            return new User(usuario.getEmail(), usuario.getPassword(), permisos);
@@ -54,7 +55,8 @@ public class UsuarioServicio implements UserDetailsService {
         return null;
     }
 
-    private void validar(String nombre, String email, String password, String password2) throws MiExcepcion {
+    private void validar(String nombre, String email, String password, 
+            String password2) throws MiExcepcion {
 
         if (nombre == null || nombre.isEmpty()) {
             throw new MiExcepcion("el nombre del usuario no puede ser nulo ni estar vacío");

@@ -1,8 +1,12 @@
 <!-- nav -->
 <div th:fragment="nav">
     <nav class="navbar bg-warning navbar-expand-lg mb-3">
-        <div class="container-fluid">
-            <a class="navbar-brand texttitulo" th:href="@{/}">Al estilo de Itai</a>
+        <div class="container-fluid" style="width: 90%">
+            <a class="navbar-brand" th:href="@{/}">
+                <img src="/img/InfoNewsLogo.png" alt="InfoNewsLogo" width="110" >
+            </a>
+            <!--<a class="navbar-brand texttitulo" th:href="@{/}"><img src="/img/InfoNewsLogo.png" style="width: 10rem" class="img-thumbnail m-0 p-0" alt="...">-->
+            </a>
             <button
                 class="navbar-toggler"
                 type="button"
@@ -17,31 +21,30 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" th:href="@{/}"
+                        <a class="nav-link active ms-4 my-2 fs-4" aria-current="page" th:href="@{/}"
                            >Home</a
                         >
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" th:href="@{/noticia/cargar}">Cargar Noticia</a>
+<!--                    <li class="nav-item">
+                        <a class="nav-link active my-2 ms-4 fs-4" aria-current="page" th:href="@{/noticia/cargar}">Cargar Noticia</a>
 
+                    </li>-->
+                    <ul class="ms-5">
+                        <li class="nav-link active d-flex pb-0">
+                            <p class="p-0 my-0 text-start fs-6 text-capitalize" th:text="${fecha}">Sabado 04 de Febrero de 2023</p>
+                        </li>
+                        <li class="nav-link active d-flex pt-0">
+                            <p class="p-0 my-0 text-start fs-6">Pronostico: ☀️ Caluroso, poco cambio de temperatura</p>
+                        </li>
+                    </ul>
+                    <li class="nav-item">
+                        <a class="nav-link active m-2 ms-4 fs-4" aria-current="page" th:href="@{/login}"
+                           >Login</a
+                        >
                     </li>
                     <li class="nav-item">
-                        <form action="" class="d-flex" role="search">
-                            <input
-                                class="form-control me-2"
-                                type="search"
-                                placeholder="Buscar"
-                                aria-label="Search"
-                                />
-                            <button class="btn btn-outline-dark" type="submit">Buscar</button>
-                        </form>
-                    </li>
-                    <li class="nav-item-dismiss d-flex text-end mx-3">
-                        <p th:text="${fecha}">Sabado 04 de Febrero de 2023</p>
-                    </li>
-                    <li>
-                        <p>Pronostico: ☀️ Caluroso, poco cambio de temperatura</p>
+                        <a class="nav-link active btn btn-outline-dark text-warning m-2 ms-4 fs-4" type="button" aria-current="page" th:href="@{/registrar}">Registrate!!</a>
                     </li>
                 </ul>
             </div>
@@ -49,7 +52,7 @@
     </nav>
     <div th:if="${exito != null}" class="card text-white bg-success mb-3 mensajeError" >
         <div class="card-body">
-            <h5 class="card-title"><i class="fa-solid fa-thumbs-up"></i> Exito</h5>
+            <h5 class="card-title">Exito 👌</h5>
             <p class="card-text" th:text="${exito}"></p>
         </div>
     </div>
@@ -66,60 +69,10 @@
     <footer class="py-5 bg-warning mt-5">
         <div class="container">
             <p class="m-0 text-center text-dark">
-                Copyright &copy; News Application 2023
+                Copyright &copy; InfoNews Application 2023
             </p>
         </div>
     </footer>
 </div>
 
-<!-- nav -->
-<div th:fragment="AdminNav">
-    <nav class="navbar bg-success navbar-expand-lg mb-3">
-        <div class="container-fluid">
-            <a class="navbar-brand" </a>
-            <button
-                class="navbar-toggler"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarNav"
-                aria-controls="navbarNav"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-                >
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
 
-                    <a class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
-
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" th:href="@{/noticia/cargar}">Cargar Noticia</a>
-                    </li>
-                    <li class="nav-item">
-                        <form action="" class="d-flex" role="search">
-                            <input
-                                class="form-control me-2"
-                                type="search"
-                                placeholder="Buscar"
-                                aria-label="Search"
-                                />
-                            <button class="btn btn-outline-dark d-flex" type="submit">Buscar</button>
-                        </form>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-</div>
-
-<!-- Footer
-<div th:fragment="footerAdmin">
-  <footer class="py-5 bg-dark">
-    <div class="container">
-      <p class="m-0 text-center text-white">
-        Copyright &copy; News Application 2023
-      </p>
-    </div>
-  </footer>
-</div> -->
