@@ -30,9 +30,19 @@ public class InicioControlador {
         return "mostrar";
     }
 
-    @GetMapping("/show")
-    public String show(ModelMap model) {
-        model.addAttribute("noticias", noticiaServicio.listarNoticias());
-        return "show";
+    @GetMapping("/registrar")
+    public String registrar(){
+        return "registro";
     }
+    
+    @GetMapping("/login")
+    public String login(){
+        return "login";
+    }
+    
+//    @GetMapping("/mostrar")
+//    public String show(ModelMap model) {
+//        model.addAttribute("noticias", noticiaServicio.listarNoticias());
+//        return "show";
+//    }
 }

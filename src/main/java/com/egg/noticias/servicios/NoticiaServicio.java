@@ -31,19 +31,6 @@ public class NoticiaServicio {
      * @param imagen
      * @throws com.egg.noticias.excepciones.MiExcepcion
      */
-//    @Transactional
-//    public Noticia crearNoticia(String titulo, String cuerpo, String imagen) throws MiExcepcion {
-//        
-//        validar(titulo, cuerpo, imagen);
-//        
-//        Noticia noticia = new Noticia();
-//        noticia.setTitulo(titulo);
-//        noticia.setCuerpo(cuerpo);
-//        noticia.setImagen(imagen);
-//        
-//        noticiaRepositorio.save(noticia);
-//        return noticia;
-//    }
     @Transactional
     public void crearNoticia(String titulo, String cuerpo, String imagen, String bajada) throws MiExcepcion {
 
@@ -107,6 +94,7 @@ public class NoticiaServicio {
     public void eliminar(String idNoticia) {
         noticiaRepositorio.deleteById(idNoticia);
     }
+    
 
     private void validar(String titulo, String cuerpo, String imagen, String bajada) throws MiExcepcion {
         if (titulo == null || titulo.isEmpty()) {
