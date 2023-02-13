@@ -1,11 +1,9 @@
 <!-- nav -->
 <div th:fragment="nav">
     <nav class="navbar bg-warning navbar-expand-lg mb-3">
-        <div class="container-fluid" style="width: 90%">
+        <div class="container" style="width: 90%">
             <a class="navbar-brand" th:href="@{/}">
                 <img src="/img/InfoNewsLogo.png" alt="InfoNewsLogo" width="110" >
-            </a>
-            <!--<a class="navbar-brand texttitulo" th:href="@{/}"><img src="/img/InfoNewsLogo.png" style="width: 10rem" class="img-thumbnail m-0 p-0" alt="...">-->
             </a>
             <button
                 class="navbar-toggler"
@@ -26,10 +24,7 @@
                         >
                     </li>
 
-<!--                    <li class="nav-item">
-                        <a class="nav-link active my-2 ms-4 fs-4" aria-current="page" th:href="@{/noticia/cargar}">Cargar Noticia</a>
-
-                    </li>-->
+           
                     <ul class="ms-5">
                         <li class="nav-link active d-flex pb-0">
                             <p class="p-0 my-0 text-start fs-6 text-capitalize" th:text="${fecha}">Sabado 04 de Febrero de 2023</p>
@@ -50,15 +45,15 @@
             </div>
         </div>
     </nav>
-    <div th:if="${exito != null}" class="card text-white bg-success mb-3 mensajeError" >
+    <div th:if="${exito != null}" class="container p-3 bg-success bg-opacity-25 border border-success border-start-0 rounded-end text-center text-white" >
         <div class="card-body">
-            <h5 class="card-title">Exito 👌</h5>
+            <h5 class="card-title text-warning">Exito 👌</h5>
             <p class="card-text" th:text="${exito}"></p>
         </div>
     </div>
-    <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError" >
+    <div th:if="${error != null}" class="container p-3 bg-danger bg-opacity-25 border border-danger border-start-0 rounded-end text-center text-white" >
         <div class="card-body">
-            <h5 class="card-title">Error 👎</h5>
+            <h5 class="card-title text-warning">Error 👎</h5>
             <p class="card-text" th:text="${error}"></p>
         </div>
     </div>

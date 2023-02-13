@@ -17,9 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class NoticiaServicio {
 
-    /**
-     *
-     */
     @Autowired
     public INoticiaRepositorio noticiaRepositorio;
 
@@ -29,12 +26,13 @@ public class NoticiaServicio {
      * @param titulo
      * @param cuerpo
      * @param imagen
+     * @param bajada
      * @throws com.egg.noticias.excepciones.MiExcepcion
      */
     @Transactional
     public void crearNoticia(String titulo, String cuerpo, String imagen, String bajada) throws MiExcepcion {
 
-        validar(titulo, cuerpo, imagen,bajada);
+        validar(titulo, cuerpo, imagen, bajada);
 
         Noticia noticia = new Noticia();
 
@@ -87,12 +85,22 @@ public class NoticiaServicio {
     /**
      * Metodo para eliminar noticia por id
      *
-     * @param idNoticia
+     * @param id
      */
     
     @Transactional
-    public void eliminar(String idNoticia) {
-        noticiaRepositorio.deleteById(idNoticia);
+    public void eliminarPorId(String id) {
+        noticiaRepositorio.deleteById(id);
+    }
+    /**
+     * Metodo para buscar noticia por id
+     * @param id 
+     * @return noticia 
+     */
+    @Transactional
+    public Noticia buscarNoticiaPorId(String id) {
+        Noticia noticia = noticiaRepositorio.buscarNoticiaPorId(id);
+        return noticia;
     }
     
 

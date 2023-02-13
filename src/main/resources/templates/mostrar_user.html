@@ -11,16 +11,13 @@
             crossorigin="anonymous"
             />
         <link rel="stylesheet" th:href="@{css/inicio.css}" />
-        <!-- One file includes all the Font Awesome Free icons and utilities -->
-        <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
     </head>
     <body class="bg-dark">
         <!--nav-->
-        <div th:include="layout/template::nav"></div>
-
+        <div th:include="layout/template_user::nav_user"></div>
         <div class="container text-left">
             <div
-                class="row align-items-start bg-raulary rounded"
+                class="row align-items-start bg-warning bg-opacity-25 rounded"
                 style="width: 69rem"
                 >
                 <div

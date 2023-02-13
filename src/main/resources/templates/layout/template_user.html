@@ -1,11 +1,9 @@
 <!-- nav -->
-<div th:fragment="nav">
-    <nav class="navbar bg-warning navbar-expand-lg mb-3">
-        <div class="container-fluid" style="width: 90%">
+<div th:fragment="nav_user">
+    <nav class="navbar bg-warning navbar-expand-lg mb-3 ">
+        <div class="container" style="width: 90%">
             <a class="navbar-brand" th:href="@{/}">
                 <img src="/img/InfoNewsLogo.png" alt="InfoNewsLogo" width="110" >
-            </a>
-            <!--<a class="navbar-brand texttitulo" th:href="@{/}"><img src="/img/InfoNewsLogo.png" style="width: 10rem" class="img-thumbnail m-0 p-0" alt="...">-->
             </a>
             <button
                 class="navbar-toggler"
@@ -25,11 +23,6 @@
                            >Home</a
                         >
                     </li>
-
-<!--                    <li class="nav-item">
-                        <a class="nav-link active my-2 ms-4 fs-4" aria-current="page" th:href="@{/noticia/cargar}">Cargar Noticia</a>
-
-                    </li>-->
                     <ul class="ms-5">
                         <li class="nav-link active d-flex pb-0">
                             <p class="p-0 my-0 text-start fs-6 text-capitalize" th:text="${fecha}">Sabado 04 de Febrero de 2023</p>
@@ -39,12 +32,10 @@
                         </li>
                     </ul>
                     <li class="nav-item">
-                        <a class="nav-link active m-2 ms-4 fs-4" aria-current="page" th:href="@{/login}"
-                           >Login</a
-                        >
+                        <h4 class="nav-link active ms-4 my-2 fs-4">Raul Gomez</h4>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active btn btn-outline-dark text-warning m-2 ms-4 fs-4" type="button" aria-current="page" th:href="@{/registrar}">Registrate!!</a>
+                        <a class="nav-link active btn btn-outline-dark text-warning m-2 ms-4 fs-4" type="button" aria-current="page" th:href="@{/logout}">salir</a>
                     </li>
                 </ul>
             </div>

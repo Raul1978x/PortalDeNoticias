@@ -1,6 +1,5 @@
 package com.egg.noticias.controladores;
 
-import com.egg.noticias.entidades.Noticia;
 import com.egg.noticias.servicios.NoticiaServicio;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -9,25 +8,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/noticia")
-public class NoticiaControlador {
+@RequestMapping("/rol")
+public class UsuarioControlador {
 
     @Autowired
-    public NoticiaServicio noticiaServicio;
+    private NoticiaServicio noticiaServicio;
     DateFormat dateFormat = new SimpleDateFormat("EEEEEEEEEE, d MMM yyyy");
 
-    @GetMapping("/{id}")
-    public String noticiaLeer(@PathVariable String id, ModelMap model) {
+//    @GetMapping("/user")
+//    public String user(){
+//        return "mostrar_user";
+//    }
+    @GetMapping("/user")
+    public String noticiaLeer(ModelMap model) {
         mostrarFecha(model);
-        Noticia noticia = noticiaServicio.buscarNoticiaPorId(id);
-                
-        model.put("noticia", noticia);
-
-        return "noticia";
+        model.addAttribute("noticias", noticiaServicio.listarNoticias());
+        return "mostrar_user";
     }
     
     private void mostrarFecha(ModelMap model){

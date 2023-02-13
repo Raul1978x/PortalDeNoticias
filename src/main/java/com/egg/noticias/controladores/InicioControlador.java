@@ -26,18 +26,17 @@ public class InicioControlador {
     private UsuarioServicio usuarioServicio;
 
     @GetMapping("/")
-
     public String home(ModelMap model) {
-
-        String date = dateFormat.format(new Date());
-        model.addAttribute("fecha", date);
+        
+        mostrarFecha(model);
         model.addAttribute("noticias", noticiaServicio.listarNoticias());
 
         return "mostrar";
     }
 
     @GetMapping("/registrar")
-    public String registrar() {
+    public String registrar(ModelMap model) {
+        mostrarFecha(model);
         return "registro.html";
     }
 
@@ -45,7 +44,7 @@ public class InicioControlador {
     public String registro(@RequestParam(required = false) String nombre, 
             @RequestParam String email, @RequestParam String password, 
             @RequestParam String password2, ModelMap model) {
-
+        mostrarFecha(model);
         try {
             usuarioServicio.registrar(nombre, email, password, password2);
             model.put("exito", "Usuario Registrado");
@@ -63,9 +62,15 @@ public class InicioControlador {
 
     @GetMapping("/login")
     public String login(@RequestParam(required = false) String error, ModelMap model) {
+        mostrarFecha(model);
         if (error  != null) {
             model.put("error", "Usuario o contraseña incorrecto!!");
         }
         return "login";
+    }
+    
+    private void mostrarFecha(ModelMap model){
+        String date = dateFormat.format(new Date());
+        model.addAttribute("fecha", date);
     }
 }
