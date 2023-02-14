@@ -1,5 +1,6 @@
 package com.egg.noticias.controladores;
 
+import com.egg.noticias.entidades.Noticia;
 import com.egg.noticias.entidades.Usuario;
 import com.egg.noticias.servicios.NoticiaServicio;
 import com.egg.noticias.servicios.UsuarioServicio;
@@ -12,6 +13,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -33,15 +35,26 @@ public class UserControlador {
     @GetMapping("")
     public String usuarioHome(HttpSession session, ModelMap model) {
         mostrarFecha(model);
-        
+
         model.addAttribute("noticias", noticiaServicio.listarNoticias());
         Usuario logueado = (Usuario) session.getAttribute("usuariosession");
-            model.addAttribute("logueado", logueado.getNombre());
-            System.out.println(logueado.getNombre());
+        model.addAttribute("logueado", logueado.getNombre());
+        System.out.println(logueado.getNombre());
         if (logueado.getRol().toString().equals("ADMIN")) {
             return "redirect:/admin/dashboard";
         }
         return "mostrar_user";
+    }
+
+    @GetMapping("/mostrar/{id}")
+    public String noticiaLeer(@PathVariable String id,HttpSession session, ModelMap model) {
+        mostrarFecha(model);
+        Noticia noticia = noticiaServicio.buscarNoticiaPorId(id);
+        Usuario logueado = (Usuario) session.getAttribute("usuariosession");
+        model.addAttribute("logueado", logueado.getNombre());
+        model.put("noticia", noticia);
+
+        return "noticia";
     }
 
     private void mostrarFecha(ModelMap model) {

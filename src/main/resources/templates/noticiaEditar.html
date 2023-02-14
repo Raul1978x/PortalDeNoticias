@@ -27,11 +27,11 @@
         </div>
         <div class="mb-3">
           <label for="bajada" class="form-label">bajada de la noticia</label>
-          <textarea class="form-control" id="bajada" name="bajada" rows="10" th:value="${noticia.bajada}" ></textarea>
+          <textarea class="form-control" id="bajada" name="bajada" rows="3" th:text="${noticia.bajada}" ></textarea>
         </div>
         <div class="mb-3">
           <label for="cuerpo" class="form-label">Cuerpo de la noticia</label>
-          <textarea class="form-control" id="cuerpo" name="cuerpo" rows="20" th:value="${noticia.cuerpo}"></textarea>
+          <textarea class="form-control" id="cuerpo" name="cuerpo" rows="10" th:text="${noticia.cuerpo}"></textarea>
         </div>
           <div class="mb-3">
             <label for="formFile" class="form-label">Cargar imagen del producto</label>

@@ -25,17 +25,17 @@ public class AdminControlador {
     @Autowired
     private NoticiaServicio noticiaServicio;
     DateFormat dateFormat = new SimpleDateFormat("EEEEEEEEEE, d MMM yyyy");
-    
+
     @GetMapping("/dashboard")
     public String homeAdmin(HttpSession session, ModelMap model) {
         mostrarFecha(model);
         model.addAttribute("noticias", noticiaServicio.listarNoticias());
         Usuario logueado = (Usuario) session.getAttribute("usuariosession");
-            model.addAttribute("logueado", logueado.getNombre());
-            System.out.println(logueado.getNombre());
+        model.addAttribute("logueado", logueado.getNombre());
+        System.out.println(logueado.getNombre());
         return "mostrar_admin";
     }
-    
+
     @GetMapping("/cargar")
     public String noticia(ModelMap model) {
         mostrarFecha(model);
@@ -62,35 +62,32 @@ public class AdminControlador {
         return "mostrar_admin";
 
     }
-    
-//    @GetMapping("/editar")
-//    public String editar(){
+
     @GetMapping("/editar/{id}")
-    public String editar(@PathVariable String id, ModelMap model){
+    public String editar(@PathVariable String id, ModelMap model) {
         Noticia noticia = noticiaServicio.buscarNoticiaPorId(id);
         model.put("noticia", noticia);
         return "noticiaEditar";
     }
-    
+
     @GetMapping("/eliminar/{id}")
-    public String eliminarPorId(@PathVariable String id, ModelMap model){
+    public String eliminarPorId(@PathVariable String id, ModelMap model) {
         noticiaServicio.eliminarPorId(id);
         return "mostrar_admin";
     }
-//    @GetMapping("/modificar/{isbn}")
-//    public String modificar(@PathVariable Long isbn, ModelMap modelo) {
-//        modelo.addAttribute("autores", autores);
-//        modelo.addAttribute("editoriales", editoriales);
-//        
-//        return "libro_modificar.html";
-//    }
-//    @PostMapping("/edita")
-//    public String edita(ModelMap model){
-//        
-//        return "noticiaEditar";
-//    }
-    
-     private void mostrarFecha(ModelMap model){
+
+    @GetMapping("/mostrar/{id}")
+    public String modificar(@PathVariable String id, HttpSession session, ModelMap model) {
+        mostrarFecha(model);
+        Noticia noticia = noticiaServicio.buscarNoticiaPorId(id);
+        Usuario logueado = (Usuario) session.getAttribute("usuariosession");
+        model.addAttribute("logueado", logueado.getNombre());
+        model.put("noticia", noticia);
+
+        return "noticia_admin";
+    }
+
+    private void mostrarFecha(ModelMap model) {
         String date = dateFormat.format(new Date());
         model.addAttribute("fecha", date);
     }

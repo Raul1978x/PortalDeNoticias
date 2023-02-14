@@ -34,8 +34,8 @@
                     <div class="card-body">
                         <h5 class="card-title" th:text="${noticia.titulo}">Titulo</h5>
                         <p class="card-text" th:text="${noticia.bajada}">Bajada</p>
-                        <a th:href="@{/noticia/mostrar/__${noticia.id}__}" class="btn btn-dark float-end">Leer completa</a>
-                        <a th:href="@{/admin/editar/__${noticia.id}__}" class="btn btn-dark float-start">Editar</a>
+                        <a th:href="@{/admin/mostrar/__${noticia.id}__}" class="btn btn-dark float-end">Leer completa</a>
+                        <a th:href="@{/admin/editar/__${noticia.id}__}" class="btn btn-success float-start">Editar</a>
                         <a th:href="@{/admin/eliminar/__${noticia.id}__}" class="btn btn-danger float-center">eliminar</a>
                     </div>
                 </div>
