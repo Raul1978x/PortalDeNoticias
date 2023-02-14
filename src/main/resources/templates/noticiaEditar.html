@@ -23,19 +23,19 @@
   
         <div class="mb-3">
           <label for="titulo" class="form-label">Tìtulo de la noticia</label>
-          <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Ingrese el tìtulo de la noticia" >
+          <input type="text" class="form-control" id="titulo" name="titulo" th:value="${noticia.titulo}" >
         </div>
         <div class="mb-3">
           <label for="bajada" class="form-label">bajada de la noticia</label>
-          <textarea class="form-control" id="bajada" name="bajada" rows="3" placeholder="Ingrese la bajada de la noticia" ></textarea>
+          <textarea class="form-control" id="bajada" name="bajada" rows="10" th:value="${noticia.bajada}" ></textarea>
         </div>
         <div class="mb-3">
           <label for="cuerpo" class="form-label">Cuerpo de la noticia</label>
-          <textarea class="form-control" id="cuerpo" name="cuerpo" rows="10" placeholder="Ingrese el cuerpo de la noticia" ></textarea>
+          <textarea class="form-control" id="cuerpo" name="cuerpo" rows="20" th:value="${noticia.cuerpo}"></textarea>
         </div>
           <div class="mb-3">
             <label for="formFile" class="form-label">Cargar imagen del producto</label>
-            <input class="form-control" type="file" name="imagen" id="formFile" >
+            <input class="form-control" type="file" name="imagen" id="formFile"  th:value="${noticia.imagen}">
           </div>
         <button type="submit" class="btn btn-dark m-3 text-right">Guardar</button>
      </div>

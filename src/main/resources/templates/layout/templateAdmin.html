@@ -32,10 +32,10 @@
                         <a class="nav-link active my-2 ms-4 fs-4" aria-current="page" th:href="@{/admin/editar}">Editar Noticia</a>
                     </li>
                     <li class="nav-item">
-                        <h4 class="nav-link active ms-4 my-2 fs-4">Raul Gomez</h4>
+                        <h4 class="nav-link active ms-4 my-2 fs-4" th:text="${logueado}">Raul Gomez</h4>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active btn btn-outline-dark text-warning m-2 ms-4 fs-4" type="button" aria-current="page" th:href="@{/logout}">salir</a>
+                        <a class="nav-link active btn btn-outline-dark text-warning m-2 ms-4 fs-4" type="button" aria-current="page" th:href="@{/logout}">Cerrar sesion</a>
                     </li>
                 </ul>
             </div>

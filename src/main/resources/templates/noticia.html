@@ -18,9 +18,9 @@
 
         <!-- card ultimas Noticias -->
         <div class="container text-left">
-            <div class="row align-items-start bg-warning bg-opacity-25 rounded" th:text="${noticia}">
+            <div class="row align-items-start bg-warning bg-opacity-25 rounded">
                 <div class="card m-2" style="width: 70rem">
-                    <h5 class="card-title fs-1" th:text="${noticia}">Titulo</h5>
+                    <h5 class="card-title fs-1" th:text="${noticia.titulo}">Titulo</h5>
                     <img th:src="@{/img/{img} (img =${noticia.imagen})}" class="card-img-top" th:alt="${noticia.imagen}">
                     <div class="card-body">
                         <div class="fs-5" th:text="${noticia.cuerpo}">Cuerpo</div>

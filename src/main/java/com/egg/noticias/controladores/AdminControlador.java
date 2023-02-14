@@ -1,12 +1,14 @@
 package com.egg.noticias.controladores;
 
 import com.egg.noticias.entidades.Noticia;
+import com.egg.noticias.entidades.Usuario;
 import com.egg.noticias.excepciones.MiExcepcion;
 import com.egg.noticias.servicios.NoticiaServicio;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -24,10 +26,13 @@ public class AdminControlador {
     private NoticiaServicio noticiaServicio;
     DateFormat dateFormat = new SimpleDateFormat("EEEEEEEEEE, d MMM yyyy");
     
-    @GetMapping("")
-    public String homeAdmin(ModelMap model) {
+    @GetMapping("/dashboard")
+    public String homeAdmin(HttpSession session, ModelMap model) {
         mostrarFecha(model);
         model.addAttribute("noticias", noticiaServicio.listarNoticias());
+        Usuario logueado = (Usuario) session.getAttribute("usuariosession");
+            model.addAttribute("logueado", logueado.getNombre());
+            System.out.println(logueado.getNombre());
         return "mostrar_admin";
     }
     

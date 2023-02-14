@@ -1,11 +1,13 @@
 package com.egg.noticias.controladores;
 
+import com.egg.noticias.entidades.Usuario;
 import com.egg.noticias.excepciones.MiExcepcion;
 import com.egg.noticias.servicios.NoticiaServicio;
 import com.egg.noticias.servicios.UsuarioServicio;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -25,12 +27,10 @@ public class InicioControlador {
     @Autowired
     private UsuarioServicio usuarioServicio;
 
-    @GetMapping("/")
-    public String home(ModelMap model) {
-        
+    @GetMapping("")
+    public String home(HttpSession session, ModelMap model) {
         mostrarFecha(model);
         model.addAttribute("noticias", noticiaServicio.listarNoticias());
-
         return "mostrar";
     }
 

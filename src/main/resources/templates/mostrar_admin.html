@@ -18,17 +18,14 @@
         <!--nav-->
         <div th:include="layout/templateAdmin::AdminNav"></div>
 
-        <div class="container text-left">
+        <div class="container text-left" >
             <div
                 class="row align-items-start bg-warning bg-opacity-25 rounded"
                 style="width: 69rem"
                 >
-                <div
-                    div
-                    class="card col-3 m-2 float-end text-center"
-                    style="width: 22rem"
-                    th:each="noticia:${noticias}"
-                    >
+                <div class="card col-3 m-2 float-end text-center" style="width: 22rem"
+                     th:each="noticia: ${noticias}"
+                     >
                     <img
                         th:src="@{/img/{img} (img =${noticia.imagen})}"
                         class="card-img-top"
@@ -37,9 +34,9 @@
                     <div class="card-body">
                         <h5 class="card-title" th:text="${noticia.titulo}">Titulo</h5>
                         <p class="card-text" th:text="${noticia.bajada}">Bajada</p>
-                        <a th:href="@{/noticia/{id}}" class="btn btn-dark float-end">Leer completa</a>
-                        <a th:href="@{/admin/editar/{id}}" class="btn btn-dark float-start">Editar</a>
-                        <a th:href="@{/admin/eliminar/{id}}" class="btn btn-danger float-center">eliminar</a>
+                        <a th:href="@{/noticia/mostrar/__${noticia.id}__}" class="btn btn-dark float-end">Leer completa</a>
+                        <a th:href="@{/admin/editar/__${noticia.id}__}" class="btn btn-dark float-start">Editar</a>
+                        <a th:href="@{/admin/eliminar/__${noticia.id}__}" class="btn btn-danger float-center">eliminar</a>
                     </div>
                 </div>
             </div>
