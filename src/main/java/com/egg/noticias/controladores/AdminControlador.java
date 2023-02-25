@@ -70,8 +70,25 @@ public class AdminControlador {
         return "noticiaEditar";
     }
 
+    @PostMapping("/edita/{id}")
+    public String editaNoticia(@RequestParam String id, @RequestParam String titulo, @RequestParam String bajada, @RequestParam String cuerpo, @RequestParam String imagen, ModelMap modelo)throws MiExcepcion{
+        try {
+        noticiaServicio.actualizar(id, titulo, cuerpo, imagen, bajada);
+        modelo.put("exito", "la noticia se actualizo bien");
+            Noticia noticia = noticiaServicio.buscarNoticiaPorId(id);
+        modelo.put("noticia", noticia);
+        } catch (Exception e) {
+            
+        modelo.put("error", e.getMessage());
+        }
+
+        return "mostrar_admin";
+    }
+
     @GetMapping("/eliminar/{id}")
     public String eliminarPorId(@PathVariable String id, ModelMap model) {
+        List<Noticia> noticias = noticiaServicio.listarNoticias();
+        model.put("noticias", noticias);
         noticiaServicio.eliminarPorId(id);
         return "mostrar_admin";
     }

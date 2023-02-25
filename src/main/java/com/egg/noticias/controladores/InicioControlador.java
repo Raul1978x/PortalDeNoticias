@@ -1,6 +1,5 @@
 package com.egg.noticias.controladores;
 
-import com.egg.noticias.entidades.Usuario;
 import com.egg.noticias.excepciones.MiExcepcion;
 import com.egg.noticias.servicios.NoticiaServicio;
 import com.egg.noticias.servicios.UsuarioServicio;
@@ -41,7 +40,7 @@ public class InicioControlador {
     }
 
     @PostMapping("/registro")
-    public String registro(@RequestParam(required = false) String nombre, 
+    public String registro(@RequestParam String nombre, 
             @RequestParam String email, @RequestParam String password, 
             @RequestParam String password2, ModelMap model) {
         mostrarFecha(model);
@@ -49,7 +48,7 @@ public class InicioControlador {
             usuarioServicio.registrar(nombre, email, password, password2);
             model.put("exito", "Usuario Registrado");
 
-            return "mostrar";
+            return "redirect:/";
 
         } catch (MiExcepcion ex) {
             model.put("error", ex.getMessage());
