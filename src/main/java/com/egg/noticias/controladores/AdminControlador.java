@@ -71,17 +71,17 @@ public class AdminControlador {
     }
 
     @PostMapping("/edita/{id}")
-    public String editaNoticia(@RequestParam String id, @RequestParam String titulo, @RequestParam String bajada, @RequestParam String cuerpo, @RequestParam String imagen, ModelMap modelo)throws MiExcepcion{
+    public String editaNoticia(@RequestParam String id, @RequestParam String titulo, @RequestParam String bajada, @RequestParam String cuerpo, @RequestParam String imagen, ModelMap modelo) throws MiExcepcion {
         try {
-        noticiaServicio.actualizar(id, titulo, cuerpo, imagen, bajada);
-        modelo.put("exito", "la noticia se actualizo bien");
-            Noticia noticia = noticiaServicio.buscarNoticiaPorId(id);
-        modelo.put("noticia", noticia);
+            noticiaServicio.actualizar(id, titulo, cuerpo, imagen, bajada);
+            modelo.put("exito", "la noticia se actualizo bien");
         } catch (Exception e) {
-            
-        modelo.put("error", e.getMessage());
+
+            modelo.put("error", e.getMessage());
         }
 
+        Noticia noticia = noticiaServicio.buscarNoticiaPorId(id);
+        modelo.put("noticia", noticia);
         return "mostrar_admin";
     }
 
@@ -92,6 +92,7 @@ public class AdminControlador {
         noticiaServicio.eliminarPorId(id);
         return "mostrar_admin";
     }
+    
 
     @GetMapping("/mostrar/{id}")
     public String modificar(@PathVariable String id, HttpSession session, ModelMap model) {

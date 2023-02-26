@@ -6,6 +6,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -24,5 +25,6 @@ public class Usuario {
     @Enumerated(EnumType.STRING)
     protected Rol rol;
     
-    protected Boolean activo;
+    @OneToOne
+    protected Imagen imagen;
 }
