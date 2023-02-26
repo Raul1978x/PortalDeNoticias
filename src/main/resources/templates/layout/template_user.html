@@ -31,6 +31,9 @@
                             <p class="p-0 my-0 text-start fs-6">Pronostico: ☀️ Caluroso, poco cambio de temperatura</p>
                         </li>
                     </ul>
+                     <li class="nav-item">
+                         <img class="logo my-2 fs-5 rounded-5 border border-danger img-fluid img-thumbnail d-inline-block align-text-top" th:if="${session.usuariosession !=null}" th:src="@{/imagen/perfil/__${session.usuariosession.id}__}" alt="img logo perfil" width="70rem" ></img>
+                    </li>
                     <li class="nav-item">
                         <h4 class="nav-link active mx-4 my-2 fs-5" th:text="${logueado}"></h4>
                     </li>

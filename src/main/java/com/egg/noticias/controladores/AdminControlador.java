@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/admin")
@@ -43,15 +44,15 @@ public class AdminControlador {
     }
 
     @PostMapping("/carga")
-    public String cargarNoticia(@RequestParam String titulo,
-            @RequestParam String cuerpo, @RequestParam String bajada,
-            @RequestParam(required = false) String imagen, ModelMap model)
+    public String cargarNoticia(@RequestParam MultipartFile archivo,
+            @RequestParam String titulo, @RequestParam String cuerpo, 
+            @RequestParam String bajada, ModelMap model)
             throws MiExcepcion {
         mostrarFecha(model);
         try {
             List<Noticia> noticias = noticiaServicio.listarNoticias();
             model.put("noticias", noticias);
-            noticiaServicio.crearNoticia(titulo, cuerpo, imagen, bajada);
+            noticiaServicio.crearNoticia(archivo, titulo, cuerpo, bajada);
             model.put("exito", "La Noticia fue cargada exitosamente");
 
         } catch (MiExcepcion e) {
@@ -59,7 +60,7 @@ public class AdminControlador {
 
             return "noticiaForm";
         }
-        return "mostrar_admin";
+        return "redirect:/admin/dashboard";
 
     }
 
@@ -71,18 +72,18 @@ public class AdminControlador {
     }
 
     @PostMapping("/edita/{id}")
-    public String editaNoticia(@RequestParam String id, @RequestParam String titulo, @RequestParam String bajada, @RequestParam String cuerpo, @RequestParam String imagen, ModelMap modelo) throws MiExcepcion {
+    public String editaNoticia(@RequestParam String id, @RequestParam String titulo, @RequestParam String bajada, @RequestParam String cuerpo, ModelMap modelo,MultipartFile archivo) throws MiExcepcion {
         try {
-            noticiaServicio.actualizar(id, titulo, cuerpo, imagen, bajada);
+            noticiaServicio.actualizar(archivo, id, titulo, cuerpo, bajada);
             modelo.put("exito", "la noticia se actualizo bien");
         } catch (Exception e) {
 
             modelo.put("error", e.getMessage());
         }
 
-        Noticia noticia = noticiaServicio.buscarNoticiaPorId(id);
-        modelo.put("noticia", noticia);
-        return "mostrar_admin";
+//        Noticia noticia = noticiaServicio.buscarNoticiaPorId(id);
+//        modelo.put("noticia", noticia);
+        return "redirect:/admin/dashboard";
     }
 
     @GetMapping("/eliminar/{id}")
@@ -90,7 +91,7 @@ public class AdminControlador {
         List<Noticia> noticias = noticiaServicio.listarNoticias();
         model.put("noticias", noticias);
         noticiaServicio.eliminarPorId(id);
-        return "mostrar_admin";
+        return "redirect:/admin/dashboard";
     }
     
 

@@ -21,7 +21,7 @@
         <!-- card ultimas Noticias -->
         <div class="container text-left" >
             <div class="row align-items-start bg-warning rounded">
-                <form class="formulario" th:action="@{/registro}" method="POST">
+                <form class="formulario" th:action="@{/registro}" method="POST" enctype="multipart/form-data">
                     <div class="form-group my-3">
                         <h3 class="card-title">Registrate!</h3>
                     </div>
@@ -32,11 +32,15 @@
                         <input type="text" class="form-control" name="email" placeholder="EMAIL" >
                     </div>
                     <div class="form-group my-3">
+                        <input type="file" class="form-control" name="archivo" >
+                    </div>
+                    <div class="form-group my-3">
                         <input type="text" class="form-control" name="password" placeholder="CONTRASEÑA" >
                     </div>
                     <div class="form-group my-3">
                         <input type="text" class="form-control" name="password2" placeholder="REPETIR CONTRASEÑA" >
                     </div>
+                    
                     <button type="submit" class="btn btn-dark m-3 float-end">Registrame</button>
                 </form>
             </div>

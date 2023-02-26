@@ -27,7 +27,7 @@
                      th:each="noticia: ${noticias}"
                      >
                     <img
-                        th:src="@{/img/{img} (img =${noticia.imagen})}"
+                    th:src="@{/imagen/noticia/__${noticia.id}__}"
                         class="card-img-top"
                         th:alt="${noticia.imagen}"
                         />

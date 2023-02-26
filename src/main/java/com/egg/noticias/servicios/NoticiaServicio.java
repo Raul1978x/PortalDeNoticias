@@ -1,5 +1,6 @@
 package com.egg.noticias.servicios;
 
+import com.egg.noticias.entidades.Imagen;
 import com.egg.noticias.entidades.Noticia;
 import com.egg.noticias.excepciones.MiExcepcion;
 import com.egg.noticias.repositorios.INoticiaRepositorio;
@@ -9,6 +10,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -18,28 +20,33 @@ import org.springframework.transaction.annotation.Transactional;
 public class NoticiaServicio {
 
     @Autowired
-    public INoticiaRepositorio noticiaRepositorio;
+    private INoticiaRepositorio noticiaRepositorio;
+    @Autowired
+    private ImagenServicio imagenServicio;
 
     /**
      * Metodo para persistir datos en el repositorio desde el servicio
      *
+     * @param archivo
      * @param titulo
      * @param cuerpo
-     * @param imagen
      * @param bajada
      * @throws com.egg.noticias.excepciones.MiExcepcion
      */
     @Transactional
-    public void crearNoticia(String titulo, String cuerpo, String imagen, String bajada) throws MiExcepcion {
+    public void crearNoticia(MultipartFile archivo, String titulo, String cuerpo, String bajada) throws MiExcepcion {
 
-        validar(titulo, cuerpo, imagen, bajada);
+        validar(titulo, cuerpo, bajada);
 
         Noticia noticia = new Noticia();
 
         noticia.setTitulo(titulo);
         noticia.setCuerpo(cuerpo);
-        noticia.setImagen(imagen);
         noticia.setBajada(bajada);
+
+        Imagen imagen = imagenServicio.guardar(archivo);
+
+        noticia.setImagen(imagen);
 
         noticiaRepositorio.save(noticia);
     }
@@ -47,20 +54,21 @@ public class NoticiaServicio {
     /**
      * Metodo para actualizar datos en el repositorio desde el servicio
      *
+     * @param archivo
      * @param id
      * @param titulo
      * @param cuerpo
-     * @param imagen
      * @param bajada
      */
     @Transactional
-    public void actualizar(String id, String titulo, String cuerpo, String imagen, String bajada) {
+    public void actualizar(MultipartFile archivo, String id, String titulo, String cuerpo, String bajada) throws MiExcepcion {
         Optional<Noticia> respuesta = noticiaRepositorio.findById(id);
 
         if (respuesta.isPresent()) {
             Noticia noticia = respuesta.get();
             noticia.setTitulo(titulo);
             noticia.setCuerpo(cuerpo);
+            Imagen imagen = imagenServicio.guardar(archivo);
             noticia.setImagen(imagen);
             noticia.setBajada(bajada);
             noticiaRepositorio.save(noticia);
@@ -87,24 +95,24 @@ public class NoticiaServicio {
      *
      * @param id
      */
-    
     @Transactional
     public void eliminarPorId(String id) {
         noticiaRepositorio.deleteById(id);
     }
+
     /**
      * Metodo para buscar noticia por id
-     * @param id 
-     * @return noticia 
+     *
+     * @param id
+     * @return noticia
      */
     @Transactional
     public Noticia buscarNoticiaPorId(String id) {
         Noticia noticia = noticiaRepositorio.buscarNoticiaPorId(id);
         return noticia;
     }
-    
 
-    private void validar(String titulo, String cuerpo, String imagen, String bajada) throws MiExcepcion {
+    private void validar(String titulo, String cuerpo, String bajada) throws MiExcepcion {
         if (titulo == null || titulo.isEmpty()) {
             throw new MiExcepcion("el título no puede ser nulo ni estar vacío");
         }
@@ -114,8 +122,8 @@ public class NoticiaServicio {
         if (bajada == null || bajada.isEmpty()) {
             throw new MiExcepcion("la bajada de la noticia no puede ser nulo ni estar vacía");
         }
-        if (imagen == null || imagen.isEmpty()) {
-            throw new MiExcepcion("la imágen no puede ser nulo ni estar vacía");
-        }
+//        if (archivo == null) {
+//            throw new MiExcepcion("la imágen no puede ser nulo ni estar vacía");
+//        }
     }
 }

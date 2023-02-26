@@ -19,7 +19,8 @@
 
         <!-- cargar Noticias -->
         <div class="container bg-success bg-opacity-75 rounded">
-            <form class="formulario" th:action="@{/admin/edita/{id}}" method="post">
+            <form class="formulario" th:action="@{/admin/edita/{id}}" method="post" enctype="multipart/form-data">
+                
                 <input hidden th:value="${id}" name="id">
                 <div class="mb-3">
                     <label for="titulo" class="form-label">Tìtulo de la noticia</label>
@@ -35,7 +36,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="formFile" class="form-label">Cargar imagen del producto</label>
-                    <input class="form-control" type="file" name="imagen" id="formFile"  th:value="${noticia.imagen}">
+                    <input class="form-control" type="file" name="archivo" id="formFile">
                 </div>
                 <button type="submit" class="btn btn-dark m-3 text-right">Guardar</button>
         </div>
