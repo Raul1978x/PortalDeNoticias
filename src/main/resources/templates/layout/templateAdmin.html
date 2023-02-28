@@ -19,14 +19,25 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
 
-                    <li class="nav-item">
-                        <a class="nav-link active ms-2 my-2 fs-5" aria-current="page" th:href="@{/admin/dashboard}"
-                           >Home</a
-                        >
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active my-2 ms-2 fs-5" aria-current="page" th:href="@{/admin/cargar}">Crear Noticia</a>
+                    <!--                    <li class="nav-item">
+                                            <a class="nav-link active ms-1 my-1 fs-5" aria-current="page" th:href="@{/admin/dashboard}"
+                                               >Home</a
+                                            >
+                                        </li>-->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle ms-0 my-1 fs-5" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Menu
+                        </a>
+                        <ul class="dropdown-menu bg-warning bg-opacity-75">
+                            <li><a class="dropdown-item fs-6" th:href="@{/admin/usuarios}">Lista de usuarios registrados</a></li>
+                            <li><a class="dropdown-item fs-6" href="#">Another action</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <!--<li><a class="dropdown-item" href="#">Something else here</a></li>-->
+                            <li class="nav-item">
+                                <a class="dropdown-item my-1 ms-1 fs-6" aria-current="page" th:href="@{/admin/cargar}">Crear Noticia</a>
 
+                            </li>
+                        </ul>
                     </li>
                     <ul class="">
                         <li class="nav-link active d-flex pb-0">
@@ -37,13 +48,13 @@
                         </li>
                     </ul>
                     <li class="nav-item">
-                        <img class="logo my-2 fs-5 rounded-circle border border-danger" th:src="@{/imagen/perfil/__${session.usuariosession.id}__}" alt="img logo perfil" width="50rem" ></img>
+                        <img class="logo my-1 fs-5 rounded-circle border border-danger" th:src="@{/imagen/perfil/__${session.usuariosession.id}__}" alt="img logo perfil" width="40em" ></img>
                     </li>
                     <li class="nav-item">
-                        <h4 class="nav-link active ms-2 my-2 fs-5" th:text="${logueado}">Raul Gomez</h4>
+                        <h4 class="nav-link active ms-1 my-1 fs-5" th:text="${logueado}">Raul Gomez</h4>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active btn btn-outline-dark text-warning m-1 ms-4 fs-5" type="button" aria-current="page" th:href="@{/logout}">Cerrar sesion</a>
+                        <a class="nav-link active btn btn-outline-dark text-warning m-1 ms-1 fs-5" type="button" aria-current="page" th:href="@{/logout}">Cerrar sesion</a>
                     </li>
                 </ul>
             </div>

@@ -7,6 +7,9 @@ import com.egg.noticias.repositorios.INoticiaRepositorio;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import org.htmlcleaner.HtmlCleaner;
+import org.htmlcleaner.TagNode;
+import org.jsoup.Jsoup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -67,10 +70,12 @@ public class NoticiaServicio {
         if (respuesta.isPresent()) {
             Noticia noticia = respuesta.get();
             noticia.setTitulo(titulo);
-            noticia.setCuerpo(cuerpo);
+            noticia.setCuerpo(convertirAHtml(cuerpo));
+//            noticia.setCuerpo(cuerpo);
             Imagen imagen = imagenServicio.guardar(archivo);
             noticia.setImagen(imagen);
-            noticia.setBajada(bajada);
+//            noticia.setBajada(bajada);
+            noticia.setBajada(convertirAHtml(bajada));
             noticiaRepositorio.save(noticia);
         }
     }
@@ -110,6 +115,18 @@ public class NoticiaServicio {
     public Noticia buscarNoticiaPorId(String id) {
         Noticia noticia = noticiaRepositorio.buscarNoticiaPorId(id);
         return noticia;
+    }
+
+//      private String convertirAHtml(String texto) {
+//        // utilizar una librería como Jsoup o HTMLCleaner para convertir texto en HTML
+//        String html = Jsoup.parse(texto).body().html();
+//        return html;
+//    }
+    private String convertirAHtml(String texto) {
+        // utilizar HTMLCleaner para convertir texto en HTML
+        HtmlCleaner cleaner = new HtmlCleaner();
+        TagNode root = cleaner.clean(texto);
+        return cleaner.getInnerHtml(root);
     }
 
     private void validar(String titulo, String cuerpo, String bajada) throws MiExcepcion {

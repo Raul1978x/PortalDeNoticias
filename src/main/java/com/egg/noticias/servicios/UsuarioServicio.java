@@ -59,7 +59,7 @@ public class UsuarioServicio implements UserDetailsService {
     public void actualizar(MultipartFile archivo, String idUsuario, String nombre, String email, String password, String password2) throws MiExcepcion {
 
         validar(nombre, email, password, password2);
-
+        System.out.println(idUsuario + " pedido de nachoooooooooooooooooooooooooooooooooooooooooooooooooooooo");
         Optional<Usuario> respuesta = usuarioRepositorio.findById(idUsuario);
         if (respuesta.isPresent()) {
 
@@ -71,17 +71,18 @@ public class UsuarioServicio implements UserDetailsService {
 
             usuario.setRol(Rol.USER);
             
-            String idImagen = null;
+//            String idImagen = null;
+//            
+//            if (usuario.getImagen() != null) {
+//                idImagen = usuario.getImagen().getId();
+//            }
             
-            if (usuario.getImagen() != null) {
-                idImagen = usuario.getImagen().getId();
-            }
-            
-            Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
+            Imagen imagen = imagenServicio.guardar(archivo);
             
             usuario.setImagen(imagen);
             
             usuarioRepositorio.save(usuario);
+            
         }
     }
 
@@ -107,6 +108,9 @@ public class UsuarioServicio implements UserDetailsService {
         return usuarioRepositorio.getOne(id);
     }
 
+    public List<Usuario> usuarios(){
+        return usuarioRepositorio.findAll();
+    }
     private void validar(String nombre, String email, String password, 
             String password2) throws MiExcepcion {
 

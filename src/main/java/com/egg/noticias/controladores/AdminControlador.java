@@ -4,6 +4,7 @@ import com.egg.noticias.entidades.Noticia;
 import com.egg.noticias.entidades.Usuario;
 import com.egg.noticias.excepciones.MiExcepcion;
 import com.egg.noticias.servicios.NoticiaServicio;
+import com.egg.noticias.servicios.UsuarioServicio;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -26,6 +27,8 @@ public class AdminControlador {
     @Autowired
     private NoticiaServicio noticiaServicio;
     DateFormat dateFormat = new SimpleDateFormat("EEEEEEEEEE, d MMM yyyy");
+    @Autowired
+    private UsuarioServicio usuarioServicio;
 
     @GetMapping("/dashboard")
     public String homeAdmin(HttpSession session, ModelMap model) {
@@ -45,7 +48,7 @@ public class AdminControlador {
 
     @PostMapping("/carga")
     public String cargarNoticia(@RequestParam MultipartFile archivo,
-            @RequestParam String titulo, @RequestParam String cuerpo, 
+            @RequestParam String titulo, @RequestParam String cuerpo,
             @RequestParam String bajada, ModelMap model)
             throws MiExcepcion {
         mostrarFecha(model);
@@ -72,7 +75,7 @@ public class AdminControlador {
     }
 
     @PostMapping("/edita/{id}")
-    public String editaNoticia(@RequestParam String id, @RequestParam String titulo, @RequestParam String bajada, @RequestParam String cuerpo, ModelMap modelo,MultipartFile archivo) throws MiExcepcion {
+    public String editaNoticia(@RequestParam String id, @RequestParam String titulo, @RequestParam String bajada, @RequestParam String cuerpo, ModelMap modelo, MultipartFile archivo) throws MiExcepcion {
         try {
             noticiaServicio.actualizar(archivo, id, titulo, cuerpo, bajada);
             modelo.put("exito", "la noticia se actualizo bien");
@@ -93,7 +96,6 @@ public class AdminControlador {
         noticiaServicio.eliminarPorId(id);
         return "redirect:/admin/dashboard";
     }
-    
 
     @GetMapping("/mostrar/{id}")
     public String modificar(@PathVariable String id, HttpSession session, ModelMap model) {
@@ -104,6 +106,34 @@ public class AdminControlador {
         model.put("noticia", noticia);
 
         return "noticia_admin";
+    }
+
+    @GetMapping("/usuarios")
+    public String mostrarUsuarios(ModelMap model) {
+        mostrarFecha(model);
+        List<Usuario> usuarios = usuarioServicio.usuarios();
+        model.put("usuarios", usuarios);
+
+        return "listaUsuarios";
+    }
+
+    @GetMapping("/editarUsuario/{id}")
+    public String editarUsuario(@PathVariable String id, ModelMap model) throws MiExcepcion {
+        Usuario usuario = usuarioServicio.getOne(id);
+        model.put("usuario", usuario);
+        return "registro_editar";
+    }
+
+    @PostMapping("/editaUsuario/{id}")
+    public String editaUsuario(@RequestParam MultipartFile archivo, @PathVariable String id,
+            @RequestParam String nombre, @RequestParam String email,
+            @RequestParam String password, @RequestParam String password2,
+            ModelMap model, HttpSession session) throws MiExcepcion {
+//        Usuario logueado = (Usuario) session.getAttribute("usuariosession");
+//        model.addAttribute("logueado", logueado.getNombre());
+        usuarioServicio.actualizar(archivo, id, nombre, email, password, password2);
+        model.put("exito", "el usuario se actualizo correctamente!!");
+        return "redirect:/admin/usuarios";
     }
 
     private void mostrarFecha(ModelMap model) {

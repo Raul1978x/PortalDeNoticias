@@ -19,7 +19,7 @@
 
         <!-- cargar Noticias -->
         <div class="container bg-success bg-opacity-75 rounded">
-            <form class="formulario" th:action="@{/admin/edita/{id}}" method="post" enctype="multipart/form-data">
+            <form class="formulario" th:action="@{/admin/edita/__${noticia.id}__}" method="post" enctype="multipart/form-data">
                 
                 <input hidden th:value="${id}" name="id">
                 <div class="mb-3">
