@@ -43,9 +43,9 @@ public class NoticiaServicio {
 
         Noticia noticia = new Noticia();
 
-        noticia.setTitulo(titulo);
-        noticia.setCuerpo(cuerpo);
-        noticia.setBajada(bajada);
+        noticia.setTitulo(titulo.replace(System.lineSeparator(), "<br>"));
+        noticia.setCuerpo(cuerpo.replace(System.lineSeparator(), "<br>"));
+        noticia.setBajada(bajada.replace(System.lineSeparator(), "<br>"));
 
         Imagen imagen = imagenServicio.guardar(archivo);
 
@@ -69,13 +69,13 @@ public class NoticiaServicio {
 
         if (respuesta.isPresent()) {
             Noticia noticia = respuesta.get();
-            noticia.setTitulo(titulo);
-            noticia.setCuerpo(convertirAHtml(cuerpo));
+            noticia.setTitulo(titulo.replace(System.lineSeparator(), "<br>"));
+            noticia.setCuerpo(cuerpo.replace(System.lineSeparator(), "<br>"));
 //            noticia.setCuerpo(cuerpo);
             Imagen imagen = imagenServicio.guardar(archivo);
             noticia.setImagen(imagen);
 //            noticia.setBajada(bajada);
-            noticia.setBajada(convertirAHtml(bajada));
+            noticia.setBajada(bajada.replace(System.lineSeparator(), "<br>"));
             noticiaRepositorio.save(noticia);
         }
     }
@@ -118,17 +118,18 @@ public class NoticiaServicio {
     }
 
 //      private String convertirAHtml(String texto) {
-//        // utilizar una librería como Jsoup o HTMLCleaner para convertir texto en HTML
+    // utilizar una librería como Jsoup o HTMLCleaner para convertir texto en HTML
+//            texto.replace(System.lineSeparator(), "<br>");
 //        String html = Jsoup.parse(texto).body().html();
 //        return html;
 //    }
-    private String convertirAHtml(String texto) {
-        // utilizar HTMLCleaner para convertir texto en HTML
-        HtmlCleaner cleaner = new HtmlCleaner();
-        TagNode root = cleaner.clean(texto);
-        return cleaner.getInnerHtml(root);
-    }
-
+//    private String convertirAHtml(String texto) {
+//        // utilizar HTMLCleaner para convertir texto en HTML
+//        texto.replace(System.lineSeparator(), "<br>");
+//        HtmlCleaner cleaner = new HtmlCleaner();
+//        TagNode root = cleaner.clean(texto);
+//        return cleaner.getInnerHtml(root);
+//    }
     private void validar(String titulo, String cuerpo, String bajada) throws MiExcepcion {
         if (titulo == null || titulo.isEmpty()) {
             throw new MiExcepcion("el título no puede ser nulo ni estar vacío");

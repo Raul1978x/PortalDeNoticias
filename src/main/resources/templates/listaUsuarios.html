@@ -20,7 +20,7 @@
 
         <div class="container " >
             <div
-                class="row  bg-warning bg-opacity-75 "
+                class="row  bg-warning bg-opacity-50 "
                 style="width: 69rem" 
                 >
                 <div class="">
@@ -33,36 +33,33 @@
                         <th >Email</th>
                         <th >Tipo de usuario</th>
                         <th>Imagen</th>
-                        <th >Accion</th>
+                        <th class="text-left">Accion</th>
                         <!--</tr>-->
                         </thead>
-                        <tbody class="my-2" th:each="usuario: ${usuarios}">
+                        <tbody class="my-2 align-middle" th:each="usuario: ${usuarios}">
                             <tr class="text-left">
-                                <td scope="row" th:text="${usuario.nombre}">1</td>
-                                <td scope="row" th:text="${usuario.email}">Mark</td>
-                                <td scope="row" th:text="${usuario.rol}">Otto</td>
+                                <td scope="row" th:text="${usuario.nombre}">nombre</td>
+                                <td scope="row" th:text="${usuario.email}">email</td>
+                                <td scope="row" class="fw-bold " th:text="${usuario.rol}">rol</td>
                                 <td scope="row">
                                     <img width="50em" th:src="@{/imagen/perfil/__${usuario.id}__}"></img>
                                 </td>
                                 <td>
-                                    <a th:href="@{/admin/editarUsuario/__${usuario.id}__}"> modificar</a>
+                                    <ul>
+                                        <li>
+                                            <a th:href="@{/admin/editarUsuario/__${usuario.id}__}" class="text-dark text-decoration-none">🖋Editar</a>
+                                        </li>
+                                        <li>
+                                            <a th:href="@{/admin/cambiarRol/__${usuario.id}__}" class="text-dark text-decoration-none">🪶Cambiar rol</a>
+                                        </li>
+                                        <li>
+                                            <a th:href="@{/admin/eliminarUsuario/__${usuario.id}__}" class="text-dark text-decoration-none">👎Eliminar</a>
+                                        </li>
+                                    </ul>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
-                    <!--                    <img
-                                            th:src="@{/imagen/noticia/__${noticia.id}__}"
-                                            class="card-img-top"
-                                            th:alt="${noticia.imagen}"
-                                            />
-                                        <div class="card-body text-start">
-                                            <h5 class="card-title" th:text="${noticia.titulo}">Titulo</h5>
-                                            <p class="card-text" th:utext="${noticia.bajada}">Bajada</p>
-                                            <div class="text-center">
-                                                <a th:href="@{/admin/mostrar/__${noticia.id}__}" class="btn btn-dark float-end">Leer completa</a>
-                                                <a th:href="@{/admin/editar/__${noticia.id}__}" class="btn btn-success float-start">Editar</a>
-                                                <a th:href="@{/admin/eliminar/__${noticia.id}__}" class="btn btn-danger float-center">eliminar</a>
-                                            </div>-->
                 </div>
             </div>
         </div>

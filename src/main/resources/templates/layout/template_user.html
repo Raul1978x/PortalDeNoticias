@@ -3,7 +3,7 @@
     <nav class="navbar bg-warning navbar-expand-lg mb-3 ">
         <div class="container" style="width: 90%">
             <a class="navbar-brand" th:href="@{/user}">
-               <img src="/img/InfoNewsLogo.png" alt="InfoNewsLogo" width="140" class=" m-0">
+                <img src="/img/InfoNewsLogo.png" alt="InfoNewsLogo" width="140" class=" m-0">
             </a>
             <button
                 class="navbar-toggler"
@@ -31,9 +31,8 @@
                             <p class="p-0 my-0 text-start fs-6">Pronostico: ☀️ Caluroso, poco cambio de temperatura</p>
                         </li>
                     </ul>
-                     <li class="nav-item">
-                         <img class="logo my-1 fs-5 rounded-5 border border-danger img-fluid img-thumbnail d-inline-block align-text-top" th:if="${session.usuariosession !=null}" th:src="@{/imagen/perfil/__${session.usuariosession.id}__}" alt="img logo perfil" width="50em" ></img>
-                    </li>
+                    <li class="nav-item">
+                        <img class="logo my-1 fs-5 rounded border border-primary" th:src="@{/imagen/perfil/__${session.usuariosession.id}__}" alt="img logo perfil" width="50px" ></img>                    </li>
                     <li class="nav-item">
                         <h4 class="nav-link active mx-1 my-1 fs-5" th:text="${logueado}"></h4>
                     </li>

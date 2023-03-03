@@ -51,6 +51,7 @@ public class UsuarioServicio implements UserDetailsService {
         Imagen imagen = imagenServicio.guardar(archivo);
         
         usuario.setImagen(imagen);
+        
 
         usuarioRepositorio.save(usuario);
     }
@@ -59,7 +60,6 @@ public class UsuarioServicio implements UserDetailsService {
     public void actualizar(MultipartFile archivo, String idUsuario, String nombre, String email, String password, String password2) throws MiExcepcion {
 
         validar(nombre, email, password, password2);
-        System.out.println(idUsuario + " pedido de nachoooooooooooooooooooooooooooooooooooooooooooooooooooooo");
         Optional<Usuario> respuesta = usuarioRepositorio.findById(idUsuario);
         if (respuesta.isPresent()) {
 
@@ -104,12 +104,39 @@ public class UsuarioServicio implements UserDetailsService {
         return null;
     }
     
+    @Transactional(readOnly = true)
     public Usuario getOne(String id){
         return usuarioRepositorio.getOne(id);
     }
 
+    @Transactional(readOnly = true)
     public List<Usuario> usuarios(){
         return usuarioRepositorio.findAll();
+    }
+    
+    @Transactional
+    public void eliminarUsuario(String id){
+        usuarioRepositorio.deleteById(id);
+    }
+    
+    @Transactional
+    public void cambiarRol(String id) {
+            Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
+            
+            if (respuesta.isPresent()) {
+            
+                Usuario usuario = respuesta.get();
+                
+                if (usuario.getRol().toString().equals("USER")) {
+                    
+                    usuario.setRol(Rol.ADMIN);
+                    
+                }else if (usuario.getRol().toString().equals("ADMIN")) {
+                    
+                    usuario.setRol(Rol.USER);
+                }
+        }
+
     }
     private void validar(String nombre, String email, String password, 
             String password2) throws MiExcepcion {
@@ -127,4 +154,5 @@ public class UsuarioServicio implements UserDetailsService {
             throw new MiExcepcion("los passwords ingresados deben ser iguales");
         }
     }
+
 }

@@ -136,6 +136,24 @@ public class AdminControlador {
         return "redirect:/admin/usuarios";
     }
 
+    @GetMapping("/cambiarRol/{id}")
+    public String cambiarRol(@PathVariable String id) {
+
+        usuarioServicio.cambiarRol(id);
+
+        return "redirect:/admin/usuarios";
+
+    }
+    
+    @GetMapping("/eliminarUsuario/{id}")
+    public String eliminarUsuario(@PathVariable String id) {
+
+        usuarioServicio.eliminarUsuario(id);
+
+        return "redirect:/admin/usuarios";
+
+    }
+
     private void mostrarFecha(ModelMap model) {
         String date = dateFormat.format(new Date());
         model.addAttribute("fecha", date);
